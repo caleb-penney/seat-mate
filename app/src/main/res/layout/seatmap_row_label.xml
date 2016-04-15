@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.aa.hackathon.seatmate.view.SeatmateTextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:padding="0dp"
+        android:text="A"
+        android:textSize="24sp"
+        app:layout_columnWeight="1"/>
+
+    <com.aa.hackathon.seatmate.view.SeatmateTextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:padding="0dp"
+        android:text="B"
+        android:textSize="24sp"
+        app:layout_columnWeight="1"/>
+
+    <com.aa.hackathon.seatmate.view.SeatmateTextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:padding="0dp"
+        android:text="C"
+        android:textSize="24sp"
+        app:layout_columnWeight="1"/>
+
+    <com.aa.hackathon.seatmate.view.SeatmateTextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="0dp"
+        android:visibility="invisible"
+        app:layout_columnWeight="1"/>
+
+    <com.aa.hackathon.seatmate.view.SeatmateTextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:padding="0dp"
+        android:text="D"
+        android:textSize="24sp"
+        app:layout_columnWeight="1"/>
+
+    <com.aa.hackathon.seatmate.view.SeatmateTextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:padding="0dp"
+        android:text="E"
+        android:textSize="24sp"
+        app:layout_columnWeight="1"/>
+
+    <com.aa.hackathon.seatmate.view.SeatmateTextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:padding="0dp"
+        android:text="F"
+        android:textSize="24sp"
+        app:layout_columnWeight="1"/>
+
+</merge>

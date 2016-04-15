@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">@color/americanBlue</color>
+    <color name="colorPrimaryDark">@color/americanBlueDark</color>
+    <color name="colorAccent">@color/americanBlue</color>
+    <color name="black">#F000</color>
+
+    <!-- American Colors -->
+    <color name="americanBlue">#ff0078d2</color>
+    <color name="americanBlueDark">#ff00467f</color>
+    <color name="americanPreferredGreen">#008712</color>
+    <color name="americanStandardBlue">@color/americanBlueDark</color>
+    <color name="americanMceOrange">#D14904</color>
 </resources>
