@@ -2,12 +2,15 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
     <com.aa.hackathon.seatmate.view.SeatView
+        android:id="@+id/seatOne"
         style="@style/SeatMapRow.SeatView"/>
 
     <com.aa.hackathon.seatmate.view.SeatView
+        android:id="@+id/seatTwo"
         style="@style/SeatMapRow.SeatView"/>
 
     <com.aa.hackathon.seatmate.view.SeatView
+        android:id="@+id/seatThree"
         style="@style/SeatMapRow.SeatView"/>
 
     <com.aa.hackathon.seatmate.view.SeatmateTextView
@@ -18,12 +21,15 @@
         android:textSize="24sp"/>
 
     <com.aa.hackathon.seatmate.view.SeatView
+        android:id="@+id/seatFour"
         style="@style/SeatMapRow.SeatView"/>
 
     <com.aa.hackathon.seatmate.view.SeatView
+        android:id="@+id/seatFive"
         style="@style/SeatMapRow.SeatView"/>
 
     <com.aa.hackathon.seatmate.view.SeatView
+        android:id="@+id/seatSix"
         style="@style/SeatMapRow.SeatView"/>
 
 </merge>

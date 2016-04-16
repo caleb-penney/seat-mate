@@ -1,6 +1,8 @@
 package com.aa.hackathon.seatmate.view;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
@@ -28,6 +30,7 @@ public class SeatView extends View {
         mContext = context;
 
         setBackground(ContextCompat.getDrawable(context, R.drawable.seat_background_drawable));
+        clearSelection();
     }
 
     @Override
@@ -36,5 +39,17 @@ public class SeatView extends View {
 
         int width = MeasureSpec.getSize(widthMeasureSpec);
         setMeasuredDimension(width, width);
+    }
+
+    public void clearSelection() {
+        LayerDrawable bgDrawable = (LayerDrawable) getBackground();
+        Drawable drawable = bgDrawable.getDrawable(1);
+        drawable.setAlpha(0);
+    }
+
+    public void setSelected() {
+        LayerDrawable bgDrawable = (LayerDrawable) getBackground();
+        Drawable drawable = bgDrawable.getDrawable(1);
+        drawable.setAlpha(255);
     }
 }
