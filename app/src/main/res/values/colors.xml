@@ -10,6 +10,6 @@
     <color name="americanBlue">#ff0078d2</color>
     <color name="americanBlueDark">#ff00467f</color>
     <color name="americanPreferredGreen">#008712</color>
-    <color name="americanStandardBlue">@color/americanBlueDark</color>
+    <color name="americanStandardBlue">@color/americanBlue</color>
     <color name="americanMceOrange">#D14904</color>
 </resources>
