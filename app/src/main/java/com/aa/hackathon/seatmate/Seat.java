@@ -8,6 +8,7 @@ import android.util.Log;
  */
 public class Seat {
 
+    private boolean isMatchedSeat = false;
     private String mSeatTypeString = "Standard";
     private String mRating;
     private String mFeatures = "";
@@ -65,9 +66,11 @@ public class Seat {
                 if ("4B".equals(seatNumber)) {
                     mPrice = "$12";
                     mRating = "3 out of 5";
+                    isMatchedSeat = true;
                 } else if ("5E".equals(seatNumber)) {
                     mPrice = "$24";
                     mRating = "5 out of 5";
+                    isMatchedSeat = true;
                 }
                 return true;
             default:
@@ -101,5 +104,9 @@ public class Seat {
 
     public String getSeatTypeString() {
         return mSeatTypeString;
+    }
+
+    public boolean isMatchedSeat() {
+        return isMatchedSeat;
     }
 }

@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,6 +29,7 @@ import com.aa.hackathon.seatmate.view.SeatView;
 import com.aa.hackathon.seatmate.view.SeatmateRelativeLayout;
 import com.aa.hackathon.seatmate.view.SeatmateTextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -47,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView mShelfFeatures;
     private TextView mShelfSeatType;
     private View mShelfTopBar;
+    private CheckBox mPreferenceCheckbox;
+    private ArrayList<SeatView> mMatchedSeatViews= new ArrayList<>();
 
     private boolean hasSeatShelfInitialized;
     private SeatView mCurrentlySelectedSeat;
@@ -116,9 +121,24 @@ public class MainActivity extends AppCompatActivity {
         mShelfFeatures = (TextView) findViewById(R.id.shelfSeatFeatures);
         mShelfSeatType = (TextView) findViewById(R.id.shelfSeatType);
         mShelfTopBar = findViewById(R.id.shelfTopBar);
+        mPreferenceCheckbox = (CheckBox) findViewById(R.id.preferenceCheckbox);
     }
 
     private void setListeners() {
+        mPreferenceCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    for (SeatView seatView : mMatchedSeatViews) {
+                        seatView.setImageAlpha(255);
+                    }
+                } else {
+                    for (SeatView seatView : mMatchedSeatViews) {
+                        seatView.setImageAlpha(0);
+                    }
+                }
+            }
+        });
         mSelectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -237,7 +257,11 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 7; i++) {
             if (i != 3) {
                 String key = String.valueOf(rowNumber) + mapIndexToLetter(i);
-                SeatView seatView = new SeatView(this, seatMap.get(key));
+                Seat seat = seatMap.get(key);
+                SeatView seatView = new SeatView(this, seat);
+                if (seat.isMatchedSeat()) {
+                    mMatchedSeatViews.add(seatView);
+                }
                 seatView.setOnClickListener(onSeatClickListener);
                 linearLayout.addView(seatView, seatLayoutParams);
             } else {

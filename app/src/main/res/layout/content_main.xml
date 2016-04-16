@@ -64,13 +64,11 @@
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_passenger_name"
-            android:drawableLeft="@drawable/standard_background_drawable"
-            android:drawablePadding="8dp"
             android:gravity="center_vertical"
             android:minHeight="40dp"
             android:padding="8dp"
             android:text="Eric R."
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold"/>
 
         <CheckBox
@@ -114,25 +112,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="2dp">
-
-            <include layout="@layout/seatmap_row"/>
-
-            <include layout="@layout/seatmap_row"/>
-
-            <include layout="@layout/seatmap_row"/>
-
-            <include layout="@layout/seatmap_row"/>
-
-            <include layout="@layout/seatmap_row"/>
-
-            <include layout="@layout/seatmap_row"/>
-
-            <include layout="@layout/seatmap_row"/>
-
-            <include layout="@layout/seatmap_row"/>
-
-        </LinearLayout>
+            android:padding="4dp" />
 
     </ScrollView>
 

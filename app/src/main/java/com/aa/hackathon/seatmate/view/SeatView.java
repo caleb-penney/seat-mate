@@ -6,7 +6,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
+import android.widget.ImageView;
 
 import com.aa.hackathon.seatmate.R;
 import com.aa.hackathon.seatmate.Seat;
@@ -14,7 +14,7 @@ import com.aa.hackathon.seatmate.Seat;
 /**
  * Created by caleb on 4/15/16.
  */
-public class SeatView extends View {
+public class SeatView extends ImageView {
 
     private Context mContext;
     private Seat mSeat;
@@ -37,6 +37,8 @@ public class SeatView extends View {
     private void init(Context context, AttributeSet attrs, Seat seat) {
         mContext = context;
 
+        setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_check_white_24dp));
+        setImageAlpha(0);
         setSeat(seat);
     }
 
