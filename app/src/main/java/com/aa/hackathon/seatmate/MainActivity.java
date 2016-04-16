@@ -17,12 +17,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.aa.hackathon.seatmate.Utils.DetailedCompatabilityResults;
+import com.aa.hackathon.seatmate.Utils.NetworkAsyncTaskRequestToShare;
+import com.aa.hackathon.seatmate.Utils.NetworkAsyncTaskSendSharedData;
+import com.aa.hackathon.seatmate.Utils.ProfileCombiner;
 import com.aa.hackathon.seatmate.view.SeatMapRowView;
 import com.aa.hackathon.seatmate.view.SeatView;
 import com.aa.hackathon.seatmate.view.SeatmateRelativeLayout;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,6 +59,32 @@ public class MainActivity extends AppCompatActivity {
 
         populateSeatLayout();
         setSupportActionBar(toolbar);
+
+        NetworkAsyncTaskRequestToShare async = new NetworkAsyncTaskRequestToShare();
+        async.execute("12145977609");
+
+        ProfileCombiner combiner = ProfileCombiner.getInstance();
+
+        float weightForD4 = ProfileCombiner.getCombinedValue("D", 4);
+        DetailedCompatabilityResults detailResultsD4 = ProfileCombiner.getLastCompatabilityDetail();
+
+        float weightForA5 = ProfileCombiner.getCombinedValue("A", 5);
+        DetailedCompatabilityResults detailResultsA5 = ProfileCombiner.getLastCompatabilityDetail();
+
+
+        new Timer().schedule(new TimerTask()
+        {
+            @Override
+            public void run()
+            {
+
+                // run AsyncTask here.
+                NetworkAsyncTaskSendSharedData async2 = new NetworkAsyncTaskSendSharedData();
+                async2.execute("12145977609");
+
+            }
+        }, 30000);
+
     }
 
     @Override
