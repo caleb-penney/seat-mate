@@ -18,7 +18,7 @@
         android:layout_height="4dp"
         android:layout_marginLeft="-16dp"
         android:layout_marginRight="-16dp"
-        android:background="@color/americanPreferredGreen"/>
+        android:background="@color/americanBlueDark"/>
 
     <TextView
         android:id="@+id/shelfSeatNumber"
@@ -28,7 +28,7 @@
         android:layout_marginTop="4dp"
         android:fontFamily="sans-serif-light"
         android:text="Seat: 8E"
-        android:textColor="@color/americanPreferredGreen"
+        android:textColor="@color/americanBlueDark"
         android:textSize="24sp"/>
 
     <ImageView
@@ -69,7 +69,7 @@
         android:layout_marginLeft="4dp"
         android:fontFamily="sans-serif-light"
         android:text="$24"
-        android:textColor="@color/americanPreferredGreen"
+        android:textColor="@color/americanBlueDark"
         android:textSize="24sp"/>
     
     <TextView
@@ -80,7 +80,7 @@
         android:layout_marginTop="6dp"
         android:layout_alignParentLeft="true"
         android:fontFamily="sans-serif-light"
-        android:text="Preferred"
+        android:text="Standard"
         android:textSize="18sp"
         android:textStyle="bold"/>
 
@@ -95,44 +95,25 @@
         android:textSize="13sp"/>
 
     <TextView
-        android:id="@+id/shelfSeatmateLabel"
+        android:id="@+id/shelfSeatmateCompatibilityLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/shelfSeatFeatures"
+        android:layout_marginRight="4dp"
         android:layout_marginTop="6dp"
-        android:layout_alignParentLeft="true"
+        android:layout_below="@id/shelfSeatFeatures"
         android:fontFamily="sans-serif-light"
-        android:text="Seat Mate Travel Preferences"
+        android:text="Seat Mate Compatibility:"
         android:textSize="18sp"
         android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/shelfSeatmateFeatures"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/shelfSeatmateLabel"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="2dp"
-        android:text="Likes to talk\nWorks in finance\nLikes music"
-        android:textSize="13sp"/>
 
     <TextView
         android:id="@+id/shelfSeatmateRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/shelfSeatmateFeatures"
+        android:layout_toRightOf="@id/shelfSeatmateCompatibilityLabel"
+        android:layout_alignTop="@id/shelfSeatmateCompatibilityLabel"
+        android:layout_alignBottom="@id/shelfSeatmateCompatibilityLabel"
+        android:textSize="18sp"
         android:text="4 out of 5"/>
-
-    <TextView
-        android:id="@+id/shelfSeatmateCompatibilityLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="2dp"
-        android:layout_alignTop="@id/shelfSeatmateFeatures"
-        android:layout_toLeftOf="@id/shelfSeatmateRating"
-        android:fontFamily="sans-serif-light"
-        android:text="Compatibility:"
-        android:textStyle="bold"/>
 
 </com.aa.hackathon.seatmate.view.SeatmateRelativeLayout>

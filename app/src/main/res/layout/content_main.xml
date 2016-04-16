@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/passengerName"
-            android:text="Filter by travel preferences"
+            android:text="Filter by seat mate preferences"
             android:textSize="18sp"/>
 
         <TextView

@@ -15,11 +15,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.aa.hackathon.seatmate.Utils.DetailedCompatabilityResults;
+import com.aa.hackathon.seatmate.Utils.NetworkAsyncTaskRequestToShare;
+import com.aa.hackathon.seatmate.Utils.NetworkAsyncTaskSendSharedData;
+import com.aa.hackathon.seatmate.Utils.ProfileCombiner;
 import com.aa.hackathon.seatmate.view.SeatMapRowView;
 import com.aa.hackathon.seatmate.view.SeatView;
 import com.aa.hackathon.seatmate.view.SeatmateRelativeLayout;
@@ -27,6 +32,8 @@ import com.aa.hackathon.seatmate.view.SeatmateTextView;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView mEditPreferenceTextView;
     private SeatmateRelativeLayout mSeatmapShelf;
     private ImageView mCloseShelfImageView;
+    private Button mSelectButton;
+    private TextView mShelfSeatNumber;
 
     private boolean hasSeatShelfInitialized;
     private SeatView mCurrentlySelectedSeat;
@@ -57,6 +66,15 @@ public class MainActivity extends AppCompatActivity {
 
         populateSeatLayout();
         setSupportActionBar(toolbar);
+
+        ProfileCombiner combiner = ProfileCombiner.getInstance();
+
+        float weightForD4 = ProfileCombiner.getCombinedValue("D", 4);
+        DetailedCompatabilityResults detailResultsD4 = ProfileCombiner.getLastCompatabilityDetail();
+
+        float weightForA5 = ProfileCombiner.getCombinedValue("A", 5);
+        DetailedCompatabilityResults detailResultsA5 = ProfileCombiner.getLastCompatabilityDetail();
+
     }
 
     @Override
@@ -87,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setViewInstances() {
+        mSelectButton = (Button) findViewById(R.id.shelfSelectButton);
+        mShelfSeatNumber = (TextView) findViewById(R.id.shelfSeatNumber);
         mSeatmapRowLinearLayout = (LinearLayout) findViewById(R.id.mainSeatmapRowLinearLayout);
         mShowPreferenceCheckbox = (CheckBox) findViewById(R.id.preferenceCheckbox);
         mEditPreferenceTextView = (TextView) findViewById(R.id.preferenceEdit);
@@ -95,6 +115,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setListeners() {
+        mSelectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NetworkAsyncTaskRequestToShare async = new NetworkAsyncTaskRequestToShare();
+                async.execute("18063366650");
+
+                new Timer().schedule(new TimerTask()
+                {
+                    @Override
+                    public void run()
+                    {
+
+                        // run AsyncTask here.
+                        NetworkAsyncTaskSendSharedData async2 = new NetworkAsyncTaskSendSharedData();
+                        async2.execute("12145977609");
+
+                    }
+                }, 30000);
+            }
+        });
         mEditPreferenceTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,17 +182,26 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (v instanceof SeatView) {
                     SeatView seatView = (SeatView) v;
-                    if (mCurrentlySelectedSeat != null) {
-                        mCurrentlySelectedSeat.clearSelection();
-                    }
-                    if (mCurrentlySelectedSeat == seatView) {
-                        mCurrentlySelectedSeat = null;
-                        animateShelfDown();
-                    } else {
-                        seatView.setSelected();
-                        mCurrentlySelectedSeat = seatView;
-                        if (!isSeatShelfShowing) {
-                            animateShelfUp();
+                    Seat seat = seatView.getSeat();
+                    if (seat != null && seat.isAvailable()) {
+                        if (seat.isAvailable()) {
+                            mSelectButton.setVisibility(View.VISIBLE);
+                        } else {
+                            mSelectButton.setVisibility(View.INVISIBLE);
+                        }
+                        mShelfSeatNumber.setText(getString(R.string.shelf_seat_number, seat.getSeatNumber()));
+                        if (mCurrentlySelectedSeat != null) {
+                            mCurrentlySelectedSeat.clearSelection();
+                        }
+                        if (mCurrentlySelectedSeat == seatView) {
+                            mCurrentlySelectedSeat = null;
+                            animateShelfDown();
+                        } else {
+                            seatView.setSelected();
+                            mCurrentlySelectedSeat = seatView;
+                            if (!isSeatShelfShowing) {
+                                animateShelfUp();
+                            }
                         }
                     }
                 }
@@ -177,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
                 SeatmateTextView textView = new SeatmateTextView(this);
                 textView.setText(String.valueOf(rowNumber));
                 textView.setGravity(Gravity.CENTER);
-                textView.setTextSize(24, TypedValue.COMPLEX_UNIT_SP);
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24f);
                 linearLayout.addView(textView, seatLayoutParams);
             }
         }

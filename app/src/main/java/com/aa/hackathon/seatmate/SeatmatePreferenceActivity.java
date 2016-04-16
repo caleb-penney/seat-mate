@@ -40,7 +40,6 @@ public class SeatmatePreferenceActivity extends AppCompatActivity {
         mSeatmatePreferenceTalk = (CheckBox) findViewById(R.id.seatmatePreferenceTalk);
         mSeatmatePreferenceSleep = (CheckBox) findViewById(R.id.seatmatePreferenceSleep);
         mSeatmatePreferenceWork = (CheckBox) findViewById(R.id.seatmatePreferenceWork);
-        mSeatmatePreferenceKids = (CheckBox) findViewById(R.id.seatmatePreferenceKids);
         mSeatmatePreferencePets = (CheckBox) findViewById(R.id.seatmatePreferencePets);
         mOptionalPrefWorkIndustry = (Spinner) findViewById(R.id.optionalPrefWorkIndustry);
         mOptionalPrefCompany = (Spinner) findViewById(R.id.optionalPrefCompany);

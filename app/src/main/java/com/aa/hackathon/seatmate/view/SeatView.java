@@ -73,19 +73,23 @@ public class SeatView extends View {
     }
 
     private Drawable determineBackgroundDrawableForSeatType(Seat.SeatType seatType) {
-        switch (seatType) {
-            case PREFERRED:
-                Log.d("SeatView", "Preferred");
-                return ContextCompat.getDrawable(mContext, R.drawable.preferred_background_drawable);
+        if (mSeat.isAvailable()) {
+            switch (seatType) {
+                case PREFERRED:
+                    Log.d("SeatView", "Preferred");
+                    return ContextCompat.getDrawable(mContext, R.drawable.preferred_background_drawable);
 
-            case MAIN_CABIN_EXTRA:
-                Log.d("SeatView", "Preferred");
-                return ContextCompat.getDrawable(mContext, R.drawable.mce_background_drawable);
+                case MAIN_CABIN_EXTRA:
+                    Log.d("SeatView", "Preferred");
+                    return ContextCompat.getDrawable(mContext, R.drawable.mce_background_drawable);
 
-            case STANDARD:
-            default:
-                Log.d("SeatView", "Preferred");
-                return ContextCompat.getDrawable(mContext, R.drawable.standard_background_drawable);
+                case STANDARD:
+                default:
+                    Log.d("SeatView", "Preferred");
+                    return ContextCompat.getDrawable(mContext, R.drawable.standard_background_drawable);
+            }
+        } else {
+            return ContextCompat.getDrawable(mContext, R.drawable.disabled_background_drawable);
         }
     }
 }

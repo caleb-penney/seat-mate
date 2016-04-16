@@ -49,9 +49,9 @@ public class Seat {
     }
 
     private boolean determineAvailability(String seatNumber) {
-        if ("B4".equals(seatNumber)) {
-            return  true;
-        } else if ("E5".equals(seatNumber)) {
+        if ("4B".equals(seatNumber)) {
+            return true;
+        } else if ("5E".equals(seatNumber)) {
             return true;
         } else {
             return false;

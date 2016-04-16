@@ -12,4 +12,5 @@
     <color name="americanPreferredGreen">#008712</color>
     <color name="americanStandardBlue">@color/americanBlue</color>
     <color name="americanMceOrange">#D14904</color>
+    <color name="americanDisabled">#C5D1D9</color>
 </resources>
