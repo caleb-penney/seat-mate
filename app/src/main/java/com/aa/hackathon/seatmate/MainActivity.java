@@ -1,11 +1,11 @@
 package com.aa.hackathon.seatmate;
 
 import android.content.Intent;
-import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -13,10 +13,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,7 +23,6 @@ import com.aa.hackathon.seatmate.Utils.DetailedCompatabilityResults;
 import com.aa.hackathon.seatmate.Utils.NetworkAsyncTaskRequestToShare;
 import com.aa.hackathon.seatmate.Utils.NetworkAsyncTaskSendSharedData;
 import com.aa.hackathon.seatmate.Utils.ProfileCombiner;
-import com.aa.hackathon.seatmate.view.SeatMapRowView;
 import com.aa.hackathon.seatmate.view.SeatView;
 import com.aa.hackathon.seatmate.view.SeatmateRelativeLayout;
 import com.aa.hackathon.seatmate.view.SeatmateTextView;
@@ -40,16 +37,19 @@ public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE = 1111;
 
     private LinearLayout mSeatmapRowLinearLayout;
-    private CheckBox mShowPreferenceCheckbox;
     private TextView mEditPreferenceTextView;
     private SeatmateRelativeLayout mSeatmapShelf;
     private ImageView mCloseShelfImageView;
     private Button mSelectButton;
     private TextView mShelfSeatNumber;
+    private TextView mShelfPrice;
+    private TextView mShelfRating;
+    private TextView mShelfFeatures;
+    private TextView mShelfSeatType;
+    private View mShelfTopBar;
 
     private boolean hasSeatShelfInitialized;
     private SeatView mCurrentlySelectedSeat;
-    private SeatView mLastSelectedSeat;
     private boolean isSeatShelfShowing;
     private int mSeatmapShelfHeight;
     private AccelerateDecelerateInterpolator mInterpolator = new AccelerateDecelerateInterpolator();
@@ -108,10 +108,14 @@ public class MainActivity extends AppCompatActivity {
         mSelectButton = (Button) findViewById(R.id.shelfSelectButton);
         mShelfSeatNumber = (TextView) findViewById(R.id.shelfSeatNumber);
         mSeatmapRowLinearLayout = (LinearLayout) findViewById(R.id.mainSeatmapRowLinearLayout);
-        mShowPreferenceCheckbox = (CheckBox) findViewById(R.id.preferenceCheckbox);
         mEditPreferenceTextView = (TextView) findViewById(R.id.preferenceEdit);
         mSeatmapShelf = (SeatmateRelativeLayout) findViewById(R.id.seatmapShelf);
         mCloseShelfImageView = (ImageView) findViewById(R.id.shelfCloseImageView);
+        mShelfPrice = (TextView) findViewById(R.id.shelfSeatPrice);
+        mShelfRating = (TextView) findViewById(R.id.shelfSeatmateRating);
+        mShelfFeatures = (TextView) findViewById(R.id.shelfSeatFeatures);
+        mShelfSeatType = (TextView) findViewById(R.id.shelfSeatType);
+        mShelfTopBar = findViewById(R.id.shelfTopBar);
     }
 
     private void setListeners() {
@@ -126,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run()
                     {
-
                         // run AsyncTask here.
                         NetworkAsyncTaskSendSharedData async2 = new NetworkAsyncTaskSendSharedData();
                         async2.execute("12145977609");
@@ -189,6 +192,21 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             mSelectButton.setVisibility(View.INVISIBLE);
                         }
+                        if (seat.getSeatType() == Seat.SeatType.PREFERRED) {
+                            int seatColor = ContextCompat.getColor(getApplicationContext(), seat.getSeatColor());
+                            mShelfSeatNumber.setTextColor(seatColor);
+                            mShelfPrice.setTextColor(seatColor);
+                            Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), seat.getSeatColor());
+                            mShelfTopBar.setBackground(drawable);
+                        }
+                        if (seat.getRating() != null) {
+                            mShelfRating.setText(seat.getRating());
+                        }
+                        if (seat.getPrice() != null) {
+                            mShelfPrice.setText(seat.getPrice());
+                        }
+                        mShelfSeatType.setText(seat.getSeatTypeString());
+                        mShelfFeatures.setText(seat.getFeatures());
                         mShelfSeatNumber.setText(getString(R.string.shelf_seat_number, seat.getSeatNumber()));
                         if (mCurrentlySelectedSeat != null) {
                             mCurrentlySelectedSeat.clearSelection();

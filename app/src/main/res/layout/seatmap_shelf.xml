@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:background="@android:color/white"
     android:clipToPadding="false"
-    android:paddingBottom="8dp"
+    android:paddingBottom="16dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     tools:layout_gravity="center_vertical">
@@ -68,7 +68,7 @@
         android:layout_alignLeft="@id/shelfSelectButton"
         android:layout_marginLeft="4dp"
         android:fontFamily="sans-serif-light"
-        android:text="$24"
+        android:text="$12"
         android:textColor="@color/americanBlueDark"
         android:textSize="24sp"/>
     
@@ -98,22 +98,31 @@
         android:id="@+id/shelfSeatmateCompatibilityLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="4dp"
         android:layout_marginTop="6dp"
         android:layout_below="@id/shelfSeatFeatures"
         android:fontFamily="sans-serif-light"
-        android:text="Seat Mate Compatibility:"
+        android:text="Seat Mate Traveler Preferences"
         android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/shelfSeatmateCompatibility"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shelfSeatmateCompatibilityLabel"
+        android:layout_marginTop="2dp"
+        android:textSize="13sp"
+        android:text="Compatibility:  "
         android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/shelfSeatmateRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/shelfSeatmateCompatibilityLabel"
-        android:layout_alignTop="@id/shelfSeatmateCompatibilityLabel"
-        android:layout_alignBottom="@id/shelfSeatmateCompatibilityLabel"
-        android:textSize="18sp"
-        android:text="4 out of 5"/>
+        android:layout_below="@id/shelfSeatmateCompatibilityLabel"
+        android:layout_toRightOf="@id/shelfSeatmateCompatibility"
+        android:layout_marginTop="2dp"
+        android:textSize="13sp"
+        android:text="3 out of 5"/>
 
 </com.aa.hackathon.seatmate.view.SeatmateRelativeLayout>
