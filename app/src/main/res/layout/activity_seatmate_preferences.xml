@@ -38,8 +38,7 @@
             android:id="@+id/selfPreferenceTalk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
+            android:minHeight="40dp"
             android:text="I like to talk"
             android:textSize="17sp"/>
 
@@ -47,8 +46,7 @@
             android:id="@+id/selfPreferenceSleep"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
+            android:minHeight="40dp"
             android:text="I like to sleep"
             android:textSize="17sp"/>
 
@@ -56,8 +54,7 @@
             android:id="@+id/selfPreferenceRead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
+            android:minHeight="40dp"
             android:text="I like to read a book"
             android:textSize="17sp"/>
 
@@ -65,8 +62,7 @@
             android:id="@+id/selfPreferenceWork"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
+            android:minHeight="40dp"
             android:text="I like to watch movies, listen to music, or work"
             android:textSize="17sp"/>
 
@@ -74,7 +70,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:layout_marginBottom="2dp"
             android:text="What kind of seat mate do you like to have?"
             android:textSize="17sp"
             android:textStyle="bold"/>
@@ -83,8 +78,7 @@
             android:id="@+id/seatmatePreferenceTalk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
+            android:minHeight="40dp"
             android:text="A talker"
             android:textSize="17sp"/>
 
@@ -92,8 +86,7 @@
             android:id="@+id/seatmatePreferenceSleep"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
+            android:minHeight="40dp"
             android:text="A sleeper"
             android:textSize="17sp"/>
 
@@ -101,8 +94,7 @@
             android:id="@+id/seatmatePreferenceWork"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
+            android:minHeight="40dp"
             android:text="Someone who likes to watch movies, listen to music, or work"
             android:textSize="17sp"/>
 
@@ -110,8 +102,7 @@
             android:id="@+id/seatmatePreferenceKids"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
+            android:minHeight="40dp"
             android:text="Children are okay"
             android:textSize="17sp"/>
 
@@ -119,8 +110,7 @@
             android:id="@+id/seatmatePreferencePets"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
+            android:minHeight="40dp"
             android:text="Pets are okay"
             android:textSize="17sp"/>
 
