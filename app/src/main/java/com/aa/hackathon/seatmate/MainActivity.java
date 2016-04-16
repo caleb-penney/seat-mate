@@ -231,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
         Map<String, Seat> seatMap = buildSeatMapForRow(rowNumber);
         mSeatmapRowLinearLayout.addView(linearLayout, layoutParams);
 
-        int margin = dpToPixels(2f);
+        int margin = dpToPixels(4f);
         LinearLayout.LayoutParams seatLayoutParams = new LinearLayout.LayoutParams(0, 0, 1f);
         seatLayoutParams.setMargins(margin, margin, margin, margin);
         for (int i = 0; i < 7; i++) {

@@ -5,6 +5,7 @@
     <color name="colorAccent">@color/americanBlue</color>
     <color name="black">#F000</color>
     <color name="gray">#EEE</color>
+    <color name="purple">#7E006F</color>
 
     <!-- American Colors -->
     <color name="americanBlue">#ff0078d2</color>

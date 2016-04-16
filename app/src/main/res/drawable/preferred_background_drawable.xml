@@ -14,4 +14,12 @@
                 android:color="@color/black" />
         </shape>
     </item>
+    <!--<item>-->
+        <!--<shape android:shape="rectangle">-->
+            <!--<corners android:radius="2dp"/>-->
+            <!--<stroke-->
+                <!--android:width="3dp"-->
+                <!--android:color="@color/purple" />-->
+        <!--</shape>-->
+    <!--</item>-->
 </layer-list>
