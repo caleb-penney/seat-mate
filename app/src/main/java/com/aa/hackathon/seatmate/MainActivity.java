@@ -149,10 +149,10 @@ public class MainActivity extends AppCompatActivity {
         mCloseShelfImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isSeatShelfShowing) {
+                if (mCurrentlySelectedSeat != null) {
+                    mCurrentlySelectedSeat.clearSelection();
+                    mCurrentlySelectedSeat = null;
                     animateShelfDown();
-                } else {
-                    animateShelfUp();
                 }
             }
         });
@@ -175,17 +175,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                     if (mCurrentlySelectedSeat == seatView) {
                         mCurrentlySelectedSeat = null;
-                        if (isSeatShelfShowing) {
-                            animateShelfDown();
-                        } else {
-                            animateShelfUp();
-                        }
+                        animateShelfDown();
                     } else {
                         seatView.setSelected();
                         mCurrentlySelectedSeat = seatView;
-                    }
-                    if (!isSeatShelfShowing) {
-                        animateShelfUp();
+                        if (!isSeatShelfShowing) {
+                            animateShelfUp();
+                        }
                     }
                 }
             }
