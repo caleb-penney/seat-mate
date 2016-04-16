@@ -52,11 +52,12 @@ public class SeatMapRowView extends LinearLayout {
         if (mSeatOnClickListener != null) {
             for (int i = 0; i < 7; i++) {
                 if (i != 3) {
-                    View seatView = getChildAt(i);
-                    if (seatView instanceof SeatView) {
+                    View view = getChildAt(i);
+                    if (view instanceof SeatView) {
+                        SeatView seatView = (SeatView) view;
                         seatView.setOnClickListener(mSeatOnClickListener);
                         String key = String.valueOf(mRowNumber) + mapIndexToLetter(i);
-                        seatView.setTag(mSeatMap.get(key));
+                        seatView.setSeat(mSeatMap.get(key));
                     }
                 }
             }

@@ -7,14 +7,19 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.aa.hackathon.seatmate.view.SeatMapRowView;
 import com.aa.hackathon.seatmate.view.SeatView;
+import com.aa.hackathon.seatmate.view.SeatmateRelativeLayout;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,8 +31,13 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout mSeatmapRowLinearLayout;
     private CheckBox mShowPreferenceCheckbox;
     private TextView mEditPreferenceTextView;
+    private SeatmateRelativeLayout mSeatmapShelf;
+    private ImageView mCloseShelfImageView;
 
     private SeatView mCurrentlySelectedSeat;
+    private boolean isSeatShelfShowing = true;
+    private int mSeatmapShelfHeight;
+    private AccelerateDecelerateInterpolator mInterpolator = new AccelerateDecelerateInterpolator();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
         mSeatmapRowLinearLayout = (LinearLayout) findViewById(R.id.mainSeatmapRowLinearLayout);
         mShowPreferenceCheckbox = (CheckBox) findViewById(R.id.preferenceCheckbox);
         mEditPreferenceTextView = (TextView) findViewById(R.id.preferenceEdit);
+        mSeatmapShelf = (SeatmateRelativeLayout) findViewById(R.id.seatmapShelf);
+        mCloseShelfImageView = (ImageView) findViewById(R.id.shelfCloseImageView);
     }
 
     private void setListeners() {
@@ -82,6 +94,28 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SeatmatePreferenceActivity.class);
                 startActivityForResult(intent, REQUEST_CODE);
+            }
+        });
+        mSeatmapShelf.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
+        mSeatmapShelf.setOnSizeChangedListener(new SeatmateRelativeLayout.OnSizeChangedListener() {
+            @Override
+            public void onSizeChanged(int height) {
+                mSeatmapShelfHeight = height;
+            }
+        });
+        mCloseShelfImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isSeatShelfShowing) {
+                    animateShelfDown();
+                } else {
+                    animateShelfUp();
+                }
             }
         });
     }
@@ -105,8 +139,20 @@ public class MainActivity extends AppCompatActivity {
                         mCurrentlySelectedSeat.clearSelection();
                     }
                     Log.d("MainActivity", "onSeatClick(): setSelectedSeat");
-                    seatView.setSelected();
-                    mCurrentlySelectedSeat = seatView;
+                    if (mCurrentlySelectedSeat == seatView) {
+                        mCurrentlySelectedSeat = null;
+                        if (isSeatShelfShowing) {
+                            animateShelfDown();
+                        } else {
+                            animateShelfUp();
+                        }
+                    } else {
+                        seatView.setSelected();
+                        mCurrentlySelectedSeat = seatView;
+                    }
+                    if (!isSeatShelfShowing) {
+                        animateShelfUp();
+                    }
                 }
             }
         });
@@ -114,6 +160,24 @@ public class MainActivity extends AppCompatActivity {
         rowView.setLayoutParams(layoutParams);
         rowView.setRowNumber(rowNumber);
         mSeatmapRowLinearLayout.addView(rowView);
+    }
+
+    private void animateShelfDown() {
+        mSeatmapShelf.animate().
+                translationY(mSeatmapShelfHeight)
+                .setDuration(300)
+                .setInterpolator(mInterpolator)
+                .start();
+        isSeatShelfShowing = false;
+    }
+
+    private void animateShelfUp() {
+        mSeatmapShelf.animate()
+                .translationY(0)
+                .setDuration(300)
+                .setInterpolator(mInterpolator)
+                .start();
+        isSeatShelfShowing = true;
     }
 
     private Map<String, Seat> buildSeatMapForRow(int rowNumber) {

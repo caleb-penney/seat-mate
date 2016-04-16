@@ -3,7 +3,7 @@
     <item android:id="@+id/seatBackgroundDrawable">
         <shape android:shape="rectangle">
             <corners android:radius="2dp"/>
-            <solid android:color="@color/colorPrimary"/>
+            <solid android:color="@color/americanStandardBlue"/>
         </shape>
     </item>
     <item android:id="@+id/seatBackgroundDrawableSelected">

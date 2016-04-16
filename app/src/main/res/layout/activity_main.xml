@@ -24,4 +24,10 @@
 
     <include layout="@layout/content_main"/>
 
+    <include
+        layout="@layout/seatmap_shelf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"/>
+
 </android.support.design.widget.CoordinatorLayout>

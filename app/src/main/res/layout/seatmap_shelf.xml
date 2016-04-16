@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<com.aa.hackathon.seatmate.view.SeatmateRelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/seatmapShelf"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@android:color/white"
     android:clipToPadding="false"
     android:paddingBottom="8dp"
     android:paddingLeft="16dp"
@@ -38,6 +40,7 @@
         android:layout_alignBottom="@id/shelfSeatNumber"
         android:layout_alignTop="@id/shelfSeatNumber"
         android:layout_marginRight="-4dp"
+        android:background="?android:selectableItemBackground"
         android:paddingLeft="2dp"
         android:paddingRight="2dp"
         android:src="@drawable/ic_close_black_24dp"
@@ -87,7 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/shelfSeatType"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="2dp"
         android:text="Standard legroom\nFavorable location"
         android:textSize="13sp"/>
 
@@ -109,7 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/shelfSeatmateLabel"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="2dp"
         android:text="Likes to talk\nWorks in finance\nLikes music"
         android:textSize="13sp"/>
 
@@ -132,4 +135,4 @@
         android:text="Compatibility:"
         android:textStyle="bold"/>
 
-</RelativeLayout>
+</com.aa.hackathon.seatmate.view.SeatmateRelativeLayout>

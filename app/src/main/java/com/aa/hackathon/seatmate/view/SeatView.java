@@ -5,9 +5,11 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.aa.hackathon.seatmate.R;
+import com.aa.hackathon.seatmate.Seat;
 
 /**
  * Created by caleb on 4/15/16.
@@ -15,6 +17,7 @@ import com.aa.hackathon.seatmate.R;
 public class SeatView extends View {
 
     private Context mContext;
+    private Seat mSeat;
 
     public SeatView(Context context) {
         super(context);
@@ -29,7 +32,7 @@ public class SeatView extends View {
     private void init(Context context, AttributeSet attrs) {
         mContext = context;
 
-        setBackground(ContextCompat.getDrawable(context, R.drawable.seat_background_drawable));
+        setBackground(ContextCompat.getDrawable(context, R.drawable.standard_background_drawable));
         clearSelection();
     }
 
@@ -51,5 +54,33 @@ public class SeatView extends View {
         LayerDrawable bgDrawable = (LayerDrawable) getBackground();
         Drawable drawable = bgDrawable.getDrawable(1);
         drawable.setAlpha(255);
+    }
+
+    public Seat getSeat() {
+        return mSeat;
+    }
+
+    public void setSeat(Seat seat) {
+        mSeat = seat;
+//        if (seat != null) {
+//            setBackground(determineBackgroundDrawableForSeatType(seat.getSeatType()));
+//        }
+    }
+
+    private Drawable determineBackgroundDrawableForSeatType(Seat.SeatType seatType) {
+        switch (seatType) {
+            case PREFERRED:
+                Log.d("SeatView", "Preferred");
+                return ContextCompat.getDrawable(mContext, R.drawable.preferred_background_drawable);
+
+            case MAIN_CABIN_EXTRA:
+                Log.d("SeatView", "Preferred");
+                return ContextCompat.getDrawable(mContext, R.drawable.mce_background_drawable);
+
+            case STANDARD:
+            default:
+                Log.d("SeatView", "Preferred");
+                return ContextCompat.getDrawable(mContext, R.drawable.standard_background_drawable);
+        }
     }
 }
