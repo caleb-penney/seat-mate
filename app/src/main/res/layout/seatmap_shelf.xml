@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipToPadding="false"
+    android:paddingBottom="8dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    tools:layout_gravity="center_vertical">
+
+    <View
+        android:id="@+id/shelfTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginLeft="-16dp"
+        android:layout_marginRight="-16dp"
+        android:background="@color/americanPreferredGreen"/>
+
+    <TextView
+        android:id="@+id/shelfSeatNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shelfTopBar"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif-light"
+        android:text="Seat: 8E"
+        android:textColor="@color/americanPreferredGreen"
+        android:textSize="24sp"/>
+
+    <ImageView
+        android:id="@+id/shelfCloseImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/shelfTopBar"
+        android:layout_alignBottom="@id/shelfSeatNumber"
+        android:layout_alignTop="@id/shelfSeatNumber"
+        android:layout_marginRight="-4dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:src="@drawable/ic_close_black_24dp"
+        android:tint="?android:textColorPrimary"/>
+    
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/shelfSelectButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shelfCloseImageView"
+        android:layout_marginRight="-4dp"
+        android:layout_alignParentRight="true"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:text="Select Seat"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/shelfSeatPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shelfTopBar"
+        android:layout_alignBaseline="@id/shelfSeatNumber"
+        android:layout_alignLeft="@id/shelfSelectButton"
+        android:layout_marginLeft="4dp"
+        android:fontFamily="sans-serif-light"
+        android:text="$24"
+        android:textColor="@color/americanPreferredGreen"
+        android:textSize="24sp"/>
+    
+    <TextView
+        android:id="@+id/shelfSeatType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shelfSeatNumber"
+        android:layout_marginTop="6dp"
+        android:layout_alignParentLeft="true"
+        android:fontFamily="sans-serif-light"
+        android:text="Preferred"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/shelfSeatFeatures"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shelfSeatType"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="6dp"
+        android:text="Standard legroom\nFavorable location"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/shelfSeatmateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shelfSeatFeatures"
+        android:layout_marginTop="6dp"
+        android:layout_alignParentLeft="true"
+        android:fontFamily="sans-serif-light"
+        android:text="Seat Mate Travel Preferences"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/shelfSeatmateFeatures"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shelfSeatmateLabel"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="6dp"
+        android:text="Likes to talk\nWorks in finance\nLikes music"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/shelfSeatmateRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/shelfSeatmateFeatures"
+        android:text="4 out of 5"/>
+
+    <TextView
+        android:id="@+id/shelfSeatmateCompatibilityLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="2dp"
+        android:layout_alignTop="@id/shelfSeatmateFeatures"
+        android:layout_toLeftOf="@id/shelfSeatmateRating"
+        android:fontFamily="sans-serif-light"
+        android:text="Compatibility:"
+        android:textStyle="bold"/>
+
+</RelativeLayout>
