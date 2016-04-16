@@ -34,8 +34,10 @@ public class MainActivity extends AppCompatActivity {
     private SeatmateRelativeLayout mSeatmapShelf;
     private ImageView mCloseShelfImageView;
 
+    private boolean hasSeatShelfInitialized;
     private SeatView mCurrentlySelectedSeat;
-    private boolean isSeatShelfShowing = true;
+    private SeatView mLastSelectedSeat;
+    private boolean isSeatShelfShowing;
     private int mSeatmapShelfHeight;
     private AccelerateDecelerateInterpolator mInterpolator = new AccelerateDecelerateInterpolator();
 
@@ -106,6 +108,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSizeChanged(int height) {
                 mSeatmapShelfHeight = height;
+                if (!hasSeatShelfInitialized) {
+                    hasSeatShelfInitialized = true;
+                    mSeatmapShelf.setTranslationY(height);
+                }
             }
         });
         mCloseShelfImageView.setOnClickListener(new View.OnClickListener() {
@@ -130,15 +136,11 @@ public class MainActivity extends AppCompatActivity {
         SeatMapRowView rowView = new SeatMapRowView(this, buildSeatMapForRow(rowNumber), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("MainActivity", "onSeatClick()");
                 if (v instanceof SeatView) {
-                    Log.d("MainActivity", "onSeatClick(): instance of SeatView");
                     SeatView seatView = (SeatView) v;
                     if (mCurrentlySelectedSeat != null) {
-                        Log.d("MainActivity", "onSeatClick(): mCurrentlySelectedSeat is not null");
                         mCurrentlySelectedSeat.clearSelection();
                     }
-                    Log.d("MainActivity", "onSeatClick(): setSelectedSeat");
                     if (mCurrentlySelectedSeat == seatView) {
                         mCurrentlySelectedSeat = null;
                         if (isSeatShelfShowing) {
