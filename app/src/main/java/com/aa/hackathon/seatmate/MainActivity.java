@@ -1,10 +1,13 @@
 package com.aa.hackathon.seatmate;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -20,6 +23,7 @@ import android.widget.TextView;
 import com.aa.hackathon.seatmate.view.SeatMapRowView;
 import com.aa.hackathon.seatmate.view.SeatView;
 import com.aa.hackathon.seatmate.view.SeatmateRelativeLayout;
+import com.aa.hackathon.seatmate.view.SeatmateTextView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -133,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void createSeatLayoutRow(int rowNumber) {
-        SeatMapRowView rowView = new SeatMapRowView(this, buildSeatMapForRow(rowNumber), new View.OnClickListener() {
+        View.OnClickListener onSeatClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (v instanceof SeatView) {
@@ -153,11 +157,55 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-        });
+        };
+
+        LinearLayout linearLayout = new LinearLayout(this);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        rowView.setLayoutParams(layoutParams);
-        rowView.setRowNumber(rowNumber);
-        mSeatmapRowLinearLayout.addView(rowView);
+        Map<String, Seat> seatMap = buildSeatMapForRow(rowNumber);
+        mSeatmapRowLinearLayout.addView(linearLayout, layoutParams);
+
+        int margin = dpToPixels(2f);
+        LinearLayout.LayoutParams seatLayoutParams = new LinearLayout.LayoutParams(0, 0, 1f);
+        seatLayoutParams.setMargins(margin, margin, margin, margin);
+        for (int i = 0; i < 7; i++) {
+            if (i != 3) {
+                String key = String.valueOf(rowNumber) + mapIndexToLetter(i);
+                SeatView seatView = new SeatView(this, seatMap.get(key));
+                seatView.setOnClickListener(onSeatClickListener);
+                linearLayout.addView(seatView, seatLayoutParams);
+            } else {
+                SeatmateTextView textView = new SeatmateTextView(this);
+                textView.setText(String.valueOf(rowNumber));
+                textView.setGravity(Gravity.CENTER);
+                textView.setTextSize(24, TypedValue.COMPLEX_UNIT_SP);
+                linearLayout.addView(textView, seatLayoutParams);
+            }
+        }
+//        SeatMapRowView rowView = new SeatMapRowView(this, buildSeatMapForRow(rowNumber), new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (v instanceof SeatView) {
+//                    SeatView seatView = (SeatView) v;
+//                    if (mCurrentlySelectedSeat != null) {
+//                        mCurrentlySelectedSeat.clearSelection();
+//                    }
+//                    if (mCurrentlySelectedSeat == seatView) {
+//                        mCurrentlySelectedSeat = null;
+//                        animateShelfDown();
+//                    } else {
+//                        seatView.setSelected();
+//                        mCurrentlySelectedSeat = seatView;
+//                        if (!isSeatShelfShowing) {
+//                            animateShelfUp();
+//                        }
+//                    }
+//                }
+//            }
+//        });
+//        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        rowView.setLayoutParams(layoutParams);
+//        rowView.setRowNumber(rowNumber);
+//        mSeatmapRowLinearLayout.addView(rowView);
     }
 
     private void animateShelfDown() {
@@ -207,5 +255,9 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return "A";
         }
+    }
+
+    private int dpToPixels(float dps) {
+        return (int) (dps * getResources().getDisplayMetrics().density);
     }
 }

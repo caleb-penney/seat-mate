@@ -21,19 +21,23 @@ public class SeatView extends View {
 
     public SeatView(Context context) {
         super(context);
-        init(context, null);
+        init(context, null, null);
     }
 
     public SeatView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context, attrs);
+        init(context, attrs, null);
     }
 
-    private void init(Context context, AttributeSet attrs) {
+    public SeatView(Context context, Seat seat) {
+        super(context);
+        init(context, null, seat);
+    }
+
+    private void init(Context context, AttributeSet attrs, Seat seat) {
         mContext = context;
 
-        setBackground(ContextCompat.getDrawable(context, R.drawable.standard_background_drawable));
-        clearSelection();
+        setSeat(seat);
     }
 
     @Override
@@ -62,9 +66,10 @@ public class SeatView extends View {
 
     public void setSeat(Seat seat) {
         mSeat = seat;
-//        if (seat != null) {
-//            setBackground(determineBackgroundDrawableForSeatType(seat.getSeatType()));
-//        }
+        if (seat != null) {
+            setBackground(determineBackgroundDrawableForSeatType(seat.getSeatType()));
+            clearSelection();
+        }
     }
 
     private Drawable determineBackgroundDrawableForSeatType(Seat.SeatType seatType) {

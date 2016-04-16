@@ -21,6 +21,7 @@ public class Seat {
         mSeatNumber = seatNumber;
         Log.d("Seat", "Seat Number: " + seatNumber);
         mSeatType = determineTypeForSeatNumber(seatNumber);
+        mAvailable = determineAvailability(seatNumber);
     }
 
     public String getSeatNumber() {
@@ -32,7 +33,7 @@ public class Seat {
     }
 
     private SeatType determineTypeForSeatNumber(String seatNumber) {
-        if (seatNumber.contains("1") || seatNumber.contains("2")) {
+        if (!seatNumber.contains("10") && seatNumber.contains("1") || seatNumber.contains("2")) {
             Log.d("Seat", "MCE type set");
             mSeatColor = R.color.americanMceOrange;
             return SeatType.MAIN_CABIN_EXTRA;
@@ -44,6 +45,16 @@ public class Seat {
             Log.d("Seat", "Standard type set");
             mSeatColor = R.color.americanStandardBlue;
             return SeatType.STANDARD;
+        }
+    }
+
+    private boolean determineAvailability(String seatNumber) {
+        if ("B4".equals(seatNumber)) {
+            return  true;
+        } else if ("E5".equals(seatNumber)) {
+            return true;
+        } else {
+            return false;
         }
     }
 
