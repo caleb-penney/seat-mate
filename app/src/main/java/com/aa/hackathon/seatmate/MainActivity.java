@@ -1,28 +1,37 @@
 package com.aa.hackathon.seatmate;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.aa.hackathon.seatmate.view.SeatMapRowView;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final int REQUEST_CODE = 1111;
+
     private LinearLayout mSeatmapRowLinearLayout;
+    private CheckBox mShowPreferenceCheckbox;
+    private TextView mEditPreferenceTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        mSeatmapRowLinearLayout = (LinearLayout) findViewById(R.id.mainSeatmapRowLinearLayout);
-        if (mSeatmapRowLinearLayout != null) {
-            mSeatmapRowLinearLayout.removeAllViews();
-        }
+
+        setViewInstances();
+        mSeatmapRowLinearLayout.removeAllViews();
+        setListeners();
+
         populateSeatLayout();
         setSupportActionBar(toolbar);
     }
@@ -49,8 +58,29 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void setViewInstances() {
+        mSeatmapRowLinearLayout = (LinearLayout) findViewById(R.id.mainSeatmapRowLinearLayout);
+        mShowPreferenceCheckbox = (CheckBox) findViewById(R.id.preferenceCheckbox);
+        mEditPreferenceTextView = (TextView) findViewById(R.id.preferenceEdit);
+    }
+
+    private void setListeners() {
+        mEditPreferenceTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SeatmatePreferenceActivity.class);
+                startActivityForResult(intent, REQUEST_CODE);
+            }
+        });
+    }
+
     private void populateSeatLayout() {
-        for (int i = 1; i <= 20; i++) {
+        for (int i = 1; i <= 10; i++) {
             createSeatLayoutRow(i);
         }
     }
